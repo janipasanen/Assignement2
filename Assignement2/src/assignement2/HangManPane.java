@@ -6,24 +6,80 @@ import java.awt.event.*;
 import java.net.*;
 import java.io.*;
 import java.util.ArrayList;
+import javax.swing.border.*;
 
 public class HangManPane extends JPanel {
     
+	JMenuBar menuBar;
+	JMenuItem startItem, quitItem;
+
 	JTextField guessesleftField, statusField, guessField, missesField;
     JLabel statusLabel;
     Socket socket;
     PrintStream socketOutput;
-
-	int difficulty = 7;
 
 	// private Random rand = new Random();
 
     public HangManPane() {
         super(); // not really necessary
 
-		setLayout(new GridLayout(5, 1, 10, 30));
+		setLayout(new GridLayout(5, 2, 10, 10));
 
-	
+		/*
+		 * Create menu
+		 * 
+		 * ----------------------------
+		 */
+
+
+		JMenu gameMenu = new JMenu("Game");
+
+		startItem = new JMenuItem("Start");
+		// startItem.addActionListener(new ActionListener()) {
+		//
+		// };
+		gameMenu.add(startItem);
+
+		quitItem = new JMenuItem("Quit");
+		// quitItem.addActionListener(listener);
+		gameMenu.add(quitItem);
+
+		menuBar = new JMenuBar();
+		menuBar.add(startItem);
+		menuBar.add(quitItem);
+		
+		clientFrame.setJMenuBar(gameMenu);
+
+		
+		// gameMenu.add(startItem);
+		// gameMenu.add(quitItem);
+
+		//
+		// JMenu optionsMenu = new JMenu("Options");
+		// optionsMenu.add(easyItem);
+		// optionsMenu.add(mediumItem);
+		// optionsMenu.add(hardItem);
+		//
+		//
+		//
+		//
+		// JRadioButtonMenuItem easyItem = new JRadioButtonMenuItem("Easy");
+		// JRadioButtonMenuItem mediumItem = new JRadioButtonMenuItem("Medium");
+		// JRadioButtonMenuItem hardItem = new JRadioButtonMenuItem("Hard");
+		//
+		// ButtonGroup group = new ButtonGroup();
+		//
+		//
+		//
+		// group.add(easyItem);
+		// group.add(mediumItem);
+		// group.add(hardItem);
+		//
+		//
+		//
+		// JMenuBar bar = new JMenuBar();
+		// bar.add(gameMenu);
+		// bar.add(optionsMenu);
 
 		/* ---------------------------- */
 
@@ -51,29 +107,13 @@ public class HangManPane extends JPanel {
 
         /* ---------------------------- */
 
-		// JPanel connectionPanel = new JPanel();
-		//
-		// statusLabel = new JLabel("Status: Not connected");
-		// connectionPanel.add(statusLabel);
-		//
-		// JButton connectButton = new JButton("Connect");
-		// connectButton.addActionListener(new Connect());
-		//
-		// connectionPanel.add(connectButton);
-		//
-		// connectionPanel.setBorder(BorderFactory.createEtchedBorder());
-		//
-		// add(connectionPanel);
-
-        /* ---------------------------- */
-
         JPanel guessPanel = new JPanel();
 
 		JLabel guessLabel = new JLabel("Guess:");
 		guessPanel.add(guessLabel);
 
 		guessField = new JTextField(1);
-		guessField.addActionListener(new Command());
+		// guessField.addActionListener(new Command());
 		guessPanel.add(guessField);
 
         add(guessPanel);
@@ -86,64 +126,19 @@ public class HangManPane extends JPanel {
 		missedLettersPanel.add(missedLettersLabel);
 
 		missesField = new JTextField(25);
-		missesField.addActionListener(new Command());
+		// missesField.addActionListener(new Command());
 		missedLettersPanel.add(missesField);
 
 		add(missedLettersPanel);
+		
+		
+
+
+	}
+
+	
 
     }
 
-	// private class Connect implements ActionListener {
-	// public void actionPerformed(ActionEvent ae) {
-	// try {
-	// String hostname = hostField.getText();
-	// int port = Integer.parseInt(portField.getText());
-	// socket = new Socket(hostname, port);
-	// socketOutput = new PrintStream(socket.getOutputStream());
-	// statusLabel.setText("Status: Connected");
-	// } catch (Exception e) {
-	// System.out.println(e);
-	// }
-	//
-	// }
-	// }
-
-    private class Command implements ActionListener {
-        public void actionPerformed(ActionEvent ae) {
-			String commandString = guessField.getText();
-			guessField.setText("");
-            try {
-                socketOutput.println(commandString);
-                if(commandString.equals("quit")) {
-                    socket.close();
-                    System.out.println("Good-bye!");
-                    statusLabel.setText("Status: Not connected");
-                }
-            } catch (Exception e) {
-                System.out.println(e);
-            }
-        }
-
-		private class Miss implements ActionListener {
-			public void actionPerformed(ActionEvent ae) {
-				String commandString = missesField.getText();
-				missesField.setText("");
-				try {
-					socketOutput.println(commandString);
-					if (commandString.equals("quit")) {
-						socket.close();
-						System.out.println("Good-bye!");
-						statusLabel.setText("Status: Not connected");
-					}
-				} catch (Exception e) {
-					System.out.println(e);
-
-				}
-			}
-    }
-		// private class JMenu
-    
-    }
-}
 
 

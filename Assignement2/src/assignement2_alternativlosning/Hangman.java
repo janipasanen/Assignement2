@@ -96,8 +96,8 @@ public class Hangman {
 	}
 
 	private void gameOver(Boolean youWon) {
-		String message = youWon ? "Your save Hangman! Great Job!"
-				: "Hangman is dead... the word that could have saved him was\""
+		String message = youWon ? "You guessed the right word!"
+				: "You guessed wrong. The word that could have saved him was\""
 						+ word + "\"...";
 
 		JOptionPane.showMessageDialog(null, message);

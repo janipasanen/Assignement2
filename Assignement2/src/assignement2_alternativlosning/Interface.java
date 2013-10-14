@@ -24,9 +24,10 @@ public class Interface extends JFrame {
 		// statusField.setBorder(new EmptyBorder(5, 0, 5, 0));
 		inputField.setHorizontalAlignment(JTextField.CENTER);
 		
-		JPanel panel = new JPanel(new GridLayout(4, 1, 10, 10));
+		JPanel panel = new JPanel(new GridLayout(4, 2, 10, 10));
 		
 		panel.setBorder(new EmptyBorder(0, 0, 0, 0));
+		// panel.setSize(400, 300);
 		panel.add(new JLabel("Guesses left:", SwingConstants.LEFT));
 		panel.add(guessLabel);
 		panel.add(new JLabel("Current status:", SwingConstants.LEFT));
@@ -36,13 +37,14 @@ public class Interface extends JFrame {
 		panel.add(new JLabel("Misses:", SwingConstants.LEFT));
 		panel.add(missesField);
 
+
 		add(panel);
 		
 		pack();
 
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		setLocationRelativeTo(null);
-		// panel.setSize(400, 300);
+
 		setJMenuBar(createMenuBar());
 		setVisible(true);
 
@@ -59,7 +61,7 @@ public class Interface extends JFrame {
 			if(!this.isEditable() || ke.getID() != KeyEvent.KEY_PRESSED) return;
 			
 			/*
-			 * Only allo letter, make them upper-case
+			 * Only allow letters, make them upper-case
 			 */
 			if(Character.isLetter(ke.getKeyChar())) {
 				this.setText(("" + ke.getKeyChar()).toUpperCase());
