@@ -141,7 +141,7 @@ public class HangManPane extends JPanel {
 				}
 			}
     }
-		Private class JMenu 
+		// private class JMenu
     
     }
 }

@@ -1,7 +1,7 @@
 package assignement2;
 import javax.swing.*;
 
-public class HangManGUI {
+public class main {
     public static void main(String[] args) {
         JFrame clientFrame = new JFrame("GUI Client");
 
