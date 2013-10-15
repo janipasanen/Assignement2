@@ -1,12 +1,17 @@
 package scratch;
 
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import javax.swing.*;
+
+import java.awt.*;
+import java.awt.event.*;
+
+import javax.swing.border.*;
+
 
 public class GUI extends JFrame {
 	// implements ActionListener {
 
+	private Main main;
 	private JMenuItem item1 = new JMenuItem("Start");
 	private JMenuItem item2 = new JMenuItem("Quit");
 
@@ -14,9 +19,15 @@ public class GUI extends JFrame {
 	private JRadioButtonMenuItem item4 = new JRadioButtonMenuItem("Medium");
 	private JRadioButtonMenuItem item5 = new JRadioButtonMenuItem("Hard");
 
+	protected JLabel guessLabel = new JLabel();
+	protected JTextField statusField = new JTextField("", 13);
+	protected JTextField inputField = new JTextField("", 1);
+	protected JTextField missesField = new JTextField("", 25);
+
 	public GUI() {
 
-		System.out.println("Hey dude this is printed out from the GUI class");
+		
+		System.out.println("Hey dude I'm printed from the GUI class");
 
 		ButtonGroup buttongroup = new ButtonGroup(); // Group all button into
 														// Options menu
@@ -25,6 +36,42 @@ public class GUI extends JFrame {
 		buttongroup.add(item5);
 
 		JFrame FrameName = new JFrame("Hangman");
+		
+
+		JPanel GuessesPanel = new JPanel();
+		JPanel CurrentStatusPanel = new JPanel();
+		JPanel GuessPanel = new JPanel();
+		JPanel MissesPanel = new JPanel();
+
+		FrameName.setLayout(new GridLayout(4, 2, 10, 10));
+
+		GuessesPanel.add(new JLabel("Guesses left:", SwingConstants.LEFT));
+		GuessesPanel.add(guessLabel);
+		FrameName.add(GuessesPanel);
+
+		/* ---------------------------- */
+
+		CurrentStatusPanel.add(new JLabel("Current status:",
+				SwingConstants.LEFT));
+		CurrentStatusPanel.add(statusField);
+		FrameName.add(CurrentStatusPanel);
+
+		/* ---------------------------- */
+
+		GuessPanel.add(new JLabel("Guess:", SwingConstants.CENTER));
+		GuessPanel.add(inputField);
+		GuessPanel.setSize(1, 1);
+		FrameName.add(GuessPanel);
+
+		/* ---------------------------- */
+
+		MissesPanel.add(new JLabel("Misses:", SwingConstants.LEFT));
+		MissesPanel.add(missesField);
+		FrameName.add(MissesPanel);
+
+		/* ---------------------------- */
+		
+
 		JMenuBar menubar = new JMenuBar();
 		JMenu menu1 = new JMenu("Game");
 		JMenu menu2 = new JMenu("Options");
@@ -57,8 +104,9 @@ public class GUI extends JFrame {
 		menubar.add(menu1);
 		menubar.add(menu2);
 
+
 		FrameName.setJMenuBar(menubar);
-		FrameName.setSize(400, 300); // Sets the size of the screen (Frame)
+		FrameName.setSize(350, 200); // Sets the size of the screen (Frame)
 		FrameName.setLocationRelativeTo(null); // Center the screen in the
 												// monitor
 		FrameName.setVisible(true); // Make the screen visible
@@ -122,5 +170,39 @@ public class GUI extends JFrame {
 		item4.setSelected(true);
 
 		}
+
+	// This is custom class for the textField the user types in
+	private class GuessField extends JTextField {
+
+		protected void processKeyEvent(KeyEvent ke) {
+
+			/*
+			 * Stop if the input is disabled or the key is not pressed
+			 */
+			if (!this.isEditable() || ke.getID() != KeyEvent.KEY_PRESSED)
+				return;
+
+			/*
+			 * Only allow letters, make them upper-case
+			 */
+			if (Character.isLetter(ke.getKeyChar())) {
+				this.setText(("" + ke.getKeyChar()).toUpperCase());
+			}
+
+			/*
+			 * If the key pressen is an enter
+			 */
+			if (ke.getKeyCode() == 10) {
+				String input = inputField.getText();
+
+				/*
+				 * If the input text is not empty and there is a Hangman ask
+				 * Hangman to gues
+				 */
+				// if (game.man != null && !input.isEmpty())
+				// game.man.guess(input.charAt(0));
+			}
+		}
+	}
 
 	}
