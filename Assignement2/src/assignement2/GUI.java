@@ -21,13 +21,19 @@ public class GUI extends JFrame {
 
 	protected JLabel guessLabel = new JLabel();
 	protected JTextField statusField = new JTextField("", 13);
-	protected JTextField inputField = new JTextField("", 1);
+	protected JTextField inputField = new GuessField();
 	protected JTextField missesField = new JTextField("", 25);
 
-	public GUI() {
 
-		
+	public GUI(Main m) {
+		super("Game");
+
 		System.out.println("Hey dude I'm printed from the GUI class");
+
+		main = m;
+		missesField.setEditable(false);
+		statusField.setEditable(false);
+
 
 		ButtonGroup buttongroup = new ButtonGroup(); // Group all button into
 														// Options menu
@@ -60,7 +66,7 @@ public class GUI extends JFrame {
 
 		GuessPanel.add(new JLabel("Guess:", SwingConstants.CENTER));
 		GuessPanel.add(inputField);
-		GuessPanel.setSize(1, 1);
+		GuessPanel.setSize(10, 10);
 		FrameName.add(GuessPanel);
 
 		/* ---------------------------- */
@@ -132,7 +138,7 @@ public class GUI extends JFrame {
 
 		item1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent ae) {
-				// game.start();
+				main.start();
 			}
 		});
 
@@ -148,22 +154,22 @@ public class GUI extends JFrame {
 
 		item3.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent ae) {
-//				game.difficulty = 10;
-//				game.start();
+				main.difficulty = 10;
+				main.start();
 			}
 		});
 
 		item4.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent ae) {
-//				game.difficulty = 7;
-//				game.start();
+				main.difficulty = 7;
+				main.start();
 			}
 		});
 
 		item5.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent ae) {
-//				game.difficulty = 5;
-//				game.start();
+				main.difficulty = 5;
+				main.start();
 			}
 		});
 
@@ -197,12 +203,12 @@ public class GUI extends JFrame {
 
 				/*
 				 * If the input text is not empty and there is a Hangman ask
-				 * Hangman to gues
+				 * Hangman to guess
 				 */
-				// if (game.man != null && !input.isEmpty())
-				// game.man.guess(input.charAt(0));
+				if (main.game != null && !input.isEmpty())
+					main.game.guess(input.charAt(0));
 			}
 		}
 	}
 
-	}
+}
