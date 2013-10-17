@@ -10,8 +10,8 @@ public class Interface extends JFrame {
 	private Game game;
 	protected JLabel guessLabel = new JLabel();
 	protected JTextField statusField = new JTextField("", 13);
-	protected JTextField missesField = new JTextField();
 	protected JTextField inputField = new GuessField();
+	protected JTextField missesField = new JTextField();
 
 	public Interface(Game g) {
 		super("Hangman");
@@ -24,10 +24,10 @@ public class Interface extends JFrame {
 		// statusField.setBorder(new EmptyBorder(5, 0, 5, 0));
 		inputField.setHorizontalAlignment(JTextField.CENTER);
 		
-		JPanel panel = new JPanel(new GridLayout(4, 2, 10, 10));
+		JPanel panel = new JPanel(new GridLayout(5, 2, 20, 20));
 		
 		panel.setBorder(new EmptyBorder(0, 0, 0, 0));
-		// panel.setSize(400, 300);
+		panel.setSize(400, 300);
 		panel.add(new JLabel("Guesses left:", SwingConstants.LEFT));
 		panel.add(guessLabel);
 		panel.add(new JLabel("Current status:", SwingConstants.LEFT));
@@ -39,7 +39,7 @@ public class Interface extends JFrame {
 
 
 		add(panel);
-		
+
 		pack();
 
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
